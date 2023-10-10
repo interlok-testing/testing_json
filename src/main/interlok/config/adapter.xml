@@ -1,0 +1,293 @@
+<adapter>
+  <unique-id>localhost</unique-id>
+  <start-up-event-imp>com.adaptris.core.event.StandardAdapterStartUpEvent</start-up-event-imp>
+  <heartbeat-event-imp>com.adaptris.core.HeartbeatEvent</heartbeat-event-imp>
+  <shared-components>
+    <connections/>
+    <services/>
+  </shared-components>
+  <event-handler class="default-event-handler">
+    <unique-id>DefaultEventHandler</unique-id>
+    <connection class="null-connection">
+      <unique-id>silly-babbage</unique-id>
+    </connection>
+    <producer class="null-message-producer">
+      <unique-id>condescending-nobel</unique-id>
+    </producer>
+  </event-handler>
+  <message-error-handler class="null-processing-exception-handler">
+    <unique-id>focused-swirles</unique-id>
+  </message-error-handler>
+  <failed-message-retrier class="no-retries">
+    <unique-id>jolly-darwin</unique-id>
+  </failed-message-retrier>
+  <channel-list>
+    <channel>
+      <consume-connection class="null-connection">
+        <unique-id>null-connection-1</unique-id>
+      </consume-connection>
+      <produce-connection class="null-connection">
+        <unique-id>null-connection-2</unique-id>
+      </produce-connection>
+      <workflow-list>
+        <standard-workflow>
+          <consumer class="null-message-consumer">
+            <unique-id>null-consumer-1</unique-id>
+          </consumer>
+          <service-collection class="service-list">
+            <unique-id>tender-shockley</unique-id>
+            <services>
+              <jwt-creator>
+                <unique-id>JWT create</unique-id>
+                <issuer>Issuer</issuer>
+                <subject>Subject</subject>
+                <audience>Audience</audience>
+                <expiration>2100-12-31 00:00:00.0 UTC</expiration>
+                <not-before>2020-12-31 00:00:00.0 UTC</not-before>
+                <secret class="base64-encoded-secret">
+                  <secret>75368d1e60b81e8d15598913419ca011ec9c558bb6ef0705067df20bf0f60b9f</secret>
+                </secret>
+              </jwt-creator>
+              <jwt-decode>
+                <unique-id>JWT Decode</unique-id>
+                <jwt-string class="string-payload-data-input-parameter"/>
+                <secret class="base64-encoded-secret">
+                  <secret>75368d1e60b81e8d15598913419ca011ec9c558bb6ef0705067df20bf0f60b9f</secret>
+                </secret>
+                <header class="metadata-data-output-parameter">
+                  <metadata-key>jwt-header</metadata-key>
+                </header>
+                <claims class="string-payload-data-output-parameter"/>
+              </jwt-decode>
+            </services>
+          </service-collection>
+          <producer class="null-message-producer">
+            <unique-id>null-producer-1</unique-id>
+          </producer>
+          <produce-exception-handler class="null-produce-exception-handler"/>
+          <unique-id>JSON Web Token Workflow</unique-id>
+          <message-metrics-interceptor>
+            <unique-id>JSON Web Token Workflow-MessageMetrics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>12</timeslice-history-count>
+          </message-metrics-interceptor>
+          <in-flight-workflow-interceptor>
+            <unique-id>JSON Web Token Workflow-InFlight</unique-id>
+          </in-flight-workflow-interceptor>
+        </standard-workflow>
+        <standard-workflow>
+          <consumer class="null-message-consumer">
+            <unique-id>null-consumer-2</unique-id>
+          </consumer>
+          <service-collection class="service-list">
+            <unique-id>dreamy-kare</unique-id>
+            <services>
+              <json-jq-transform>
+                <unique-id>jq transform</unique-id>
+                <query-source class="string-payload-data-input-parameter"/>
+              </json-jq-transform>
+            </services>
+          </service-collection>
+          <producer class="null-message-producer">
+            <unique-id>null-producer-2</unique-id>
+          </producer>
+          <produce-exception-handler class="null-produce-exception-handler"/>
+          <unique-id>JQ Transform Workflow</unique-id>
+          <message-metrics-interceptor>
+            <unique-id>JQ Transform Workflow-MessageMetrics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>12</timeslice-history-count>
+          </message-metrics-interceptor>
+          <in-flight-workflow-interceptor>
+            <unique-id>JQ Transform Workflow-InFlight</unique-id>
+          </in-flight-workflow-interceptor>
+        </standard-workflow>
+        <standard-workflow>
+          <consumer class="null-message-consumer">
+            <unique-id>null-consumer-3</unique-id>
+          </consumer>
+          <service-collection class="service-list">
+            <unique-id>adoring-heisenberg</unique-id>
+            <services>
+              <json-path-service>
+                <unique-id>json-path-service</unique-id>
+                <source class="string-payload-data-input-parameter"/>
+                <json-path-execution>
+                  <source class="constant-data-input-parameter">
+                    <value>$.store.bicycle</value>
+                  </source>
+                  <target class="string-payload-data-output-parameter"/>
+                </json-path-execution>
+              </json-path-service>
+            </services>
+          </service-collection>
+          <producer class="null-message-producer">
+            <unique-id>null-producer-3</unique-id>
+          </producer>
+          <produce-exception-handler class="null-produce-exception-handler"/>
+          <unique-id>JSON Path Workflow</unique-id>
+          <message-metrics-interceptor>
+            <unique-id>JSON Path Workflow-MessageMetrics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>12</timeslice-history-count>
+          </message-metrics-interceptor>
+          <in-flight-workflow-interceptor>
+            <unique-id>JSON Path Workflow-InFlight</unique-id>
+          </in-flight-workflow-interceptor>
+        </standard-workflow>
+        <standard-workflow>
+          <consumer class="null-message-consumer">
+            <unique-id>null-consumer-4</unique-id>
+          </consumer>
+          <service-collection class="service-list">
+            <unique-id>awesome-morse</unique-id>
+            <services>
+              <json-xml-transform-service>
+                <unique-id>JSON to XML</unique-id>
+                <direction>JSON_TO_XML</direction>
+                <driver class="simple-transformation-driver">
+                  <json-tag>json</json-tag>
+                </driver>
+              </json-xml-transform-service>
+              <json-xml-transform-service>
+                <unique-id>XML to JSON</unique-id>
+                <direction>XML_TO_JSON</direction>
+                <driver class="simple-transformation-driver">
+                  <json-tag>json</json-tag>
+                </driver>
+              </json-xml-transform-service>
+            </services>
+          </service-collection>
+          <producer class="null-message-producer">
+            <unique-id>null-producer-4</unique-id>
+          </producer>
+          <produce-exception-handler class="null-produce-exception-handler"/>
+          <unique-id>JSON XML Workflow</unique-id>
+          <message-metrics-interceptor>
+            <unique-id>JSON XML Workflow-MessageMetrics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>12</timeslice-history-count>
+          </message-metrics-interceptor>
+          <in-flight-workflow-interceptor>
+            <unique-id>JSON XML Workflow-InFlight</unique-id>
+          </in-flight-workflow-interceptor>
+        </standard-workflow>
+        <standard-workflow>
+          <consumer class="null-message-consumer">
+            <unique-id>elastic-booth</unique-id>
+          </consumer>
+          <service-collection class="service-list">
+            <unique-id>trusting-archimedes</unique-id>
+            <services>
+              <json-transform-service>
+                <unique-id>JSON Transform</unique-id>
+                <source-json class="string-payload-data-input-parameter"/>
+                <mapping-spec class="constant-data-input-parameter">
+                  <value>[ { &quot;operation&quot;: &quot;shift&quot;, &quot;spec&quot;: { &quot;rating&quot;: { &quot;primary&quot;: { &quot;values&quot;: &quot;Rating&quot; }, &quot;*&quot;: { &quot;values&quot;: &quot;SecondaryRatings.&amp;1.Value&quot;, &quot;$&quot;: &quot;SecondaryRatings.&amp;.Id&quot; } } } }, { &quot;operation&quot;: &quot;default&quot;, &quot;spec&quot;: { &quot;Range&quot;: 5, &quot;SecondaryRatings&quot;: { &quot;*&quot;: { &quot;Range&quot;: 5 } } } } ]</value>
+                </mapping-spec>
+                <target-json class="string-payload-data-output-parameter"/>
+                <metadata-filter class="remove-all-metadata-filter"/>
+              </json-transform-service>
+            </services>
+          </service-collection>
+          <producer class="null-message-producer">
+            <unique-id>eager-hugle</unique-id>
+          </producer>
+          <produce-exception-handler class="null-produce-exception-handler"/>
+          <unique-id>JSON Transform Workflow</unique-id>
+          <message-metrics-interceptor>
+            <unique-id>JSON Transform Workflow-MessageMetrics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>12</timeslice-history-count>
+          </message-metrics-interceptor>
+          <in-flight-workflow-interceptor>
+            <unique-id>JSON Transform Workflow-InFlight</unique-id>
+          </in-flight-workflow-interceptor>
+        </standard-workflow>
+        <standard-workflow>
+          <consumer class="null-message-consumer">
+            <unique-id>awesome-borg</unique-id>
+          </consumer>
+          <service-collection class="service-list">
+            <unique-id>big-jang</unique-id>
+            <services>
+              <json-to-metadata>
+                <unique-id>JSON to Metadata</unique-id>
+              </json-to-metadata>
+              <metadata-to-json-service>
+                <unique-id>Metadata to JSON</unique-id>
+              </metadata-to-json-service>
+            </services>
+          </service-collection>
+          <producer class="null-message-producer">
+            <unique-id>loving-babbage</unique-id>
+          </producer>
+          <produce-exception-handler class="null-produce-exception-handler"/>
+          <unique-id>JSON Metadata Workflow</unique-id>
+          <message-metrics-interceptor>
+            <unique-id>JSON Metadata Workflow-MessageMetrics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>12</timeslice-history-count>
+          </message-metrics-interceptor>
+          <in-flight-workflow-interceptor>
+            <unique-id>JSON Metadata Workflow-InFlight</unique-id>
+          </in-flight-workflow-interceptor>
+        </standard-workflow>
+        <standard-workflow>
+          <consumer class="null-message-consumer">
+            <unique-id>stoic-jepsen</unique-id>
+          </consumer>
+          <service-collection class="service-list">
+            <unique-id>drunk-gates</unique-id>
+            <services>
+              <json-xml-transform-service>
+                <unique-id>Streaming JSON XML Tranform</unique-id>
+                <direction>JSON_TO_XML</direction>
+                <driver class="default-streaming-transformation-driver"/>
+              </json-xml-transform-service>
+            </services>
+          </service-collection>
+          <producer class="null-message-producer">
+            <unique-id>zen-franklin</unique-id>
+          </producer>
+          <produce-exception-handler class="null-produce-exception-handler"/>
+          <unique-id>JSON Streaming Workflow</unique-id>
+          <message-metrics-interceptor>
+            <unique-id>JSON Streaming Workflow-MessageMetrics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>12</timeslice-history-count>
+          </message-metrics-interceptor>
+          <in-flight-workflow-interceptor>
+            <unique-id>JSON Streaming Workflow-InFlight</unique-id>
+          </in-flight-workflow-interceptor>
+        </standard-workflow>
+      </workflow-list>
+      <unique-id>JSON Test Channel</unique-id>
+    </channel>
+  </channel-list>
+  <message-error-digester class="standard-message-error-digester">
+    <unique-id>ErrorDigest</unique-id>
+    <digest-max-size>100</digest-max-size>
+  </message-error-digester>
+</adapter>

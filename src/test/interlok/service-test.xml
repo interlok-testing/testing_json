@@ -1,0 +1,414 @@
+<service-test>
+  <unique-id>eager-hamilton</unique-id>
+  <test-client class="local-jmx-test-client"/>
+  <helpers/>
+  <test-list>
+    <unique-id>JSON Test Channel</unique-id>
+    <test>
+      <unique-id>JWT create</unique-id>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON Web Token Workflow</workflow>
+            <service>JWT create</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <test>
+      <unique-id>JWT Decode</unique-id>
+      <test-case>
+        <unique-id>jwt-decode-test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="empty-metadata-provider"/>
+          <payload-provider class="inline-payload-provider">
+            <payload><![CDATA[eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWJqZWN0IiwiYXVkIjoiQXVkaWVuY2UiLCJuYmYiOjE2MDkzNzI4MDAsImlzcyI6Iklzc3VlciIsImV4cCI6NDEzMzg5NDQwMCwiaWF0IjoxNjE2NTA3MjM3LCJqdGkiOiI2YTBiNWE1NC0zYzZmLTQxZWYtYjU1NC03YTlhZjRkMDNhMmQifQ.l8kbu0UPQADO9YP-EAr7nUnBx6R4Tc2JYrUIKojqpIKu4IYABM48pNpmh9bVqxpy]]></payload>
+          </payload-provider>
+        </input-message-provider>
+        <assertions>
+          <assert-payload-equals>
+            <payload><![CDATA[{"sub":"Subject","aud":"Audience","nbf":1609372800,"iss":"Issuer","exp":4133894400,"iat":1616507237,"jti":"6a0b5a54-3c6f-41ef-b554-7a9af4d03a2d"}]]></payload>
+          </assert-payload-equals>
+          <assert-metadata-equals>
+            <metadata>
+              <key-value-pair>
+                <key>jwt-header</key>
+                <value>{&quot;alg&quot;:&quot;HS384&quot;}</value>
+              </key-value-pair>
+            </metadata>
+          </assert-metadata-equals>
+        </assertions>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON Web Token Workflow</workflow>
+            <service>JWT Decode</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <test>
+      <unique-id>JQ Transform</unique-id>
+      <test-case>
+        <unique-id>jq transform test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="empty-metadata-provider"/>
+          <payload-provider class="inline-payload-provider">
+            <payload><![CDATA[{ "firstName": "John", "lastName": "Smith", "isAlive": true, "age": 27, "address": { "streetAddress": "21 2nd Street", "city": "New York", "state": "NY", "postalCode": "10021-3100" }, "phoneNumbers": [ { "type": "home", "number": "212 555-1234" }, { "type": "office", "number": "646 555-4567" } ], "children": [], "spouse": null }]]></payload>
+          </payload-provider>
+        </input-message-provider>
+        <assertions>
+          <assert-payload-equals>
+            <payload><![CDATA[{
+  "firstName" : "John",
+  "lastName" : "Smith",
+  "isAlive" : true,
+  "address" : {
+    "streetAddress" : "21 2nd Street",
+    "city" : "New York",
+    "postalCode" : "10021-3100",
+    "state" : "NY"
+  },
+  "children" : [ ],
+  "age" : 27,
+  "phoneNumbers" : [ {
+    "number" : "212 555-1234",
+    "type" : "home"
+  }, {
+    "number" : "646 555-4567",
+    "type" : "office"
+  } ],
+  "spouse" : null
+}]]></payload>
+          </assert-payload-equals>
+        </assertions>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JQ Transform Workflow</workflow>
+            <service>jq transform</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <test>
+      <unique-id>JSON Path</unique-id>
+      <test-case>
+        <unique-id>JSON Path Test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="empty-metadata-provider"/>
+          <payload-provider class="inline-payload-provider">
+            <payload><![CDATA[{
+    "store": {
+        "book": [
+            {
+                "category": "reference",
+                "author": "Nigel Rees",
+                "title": "Sayings of the Century",
+                "price": 8.95
+            },
+            {
+                "category": "fiction",
+                "author": "Evelyn Waugh",
+                "title": "Sword of Honour",
+                "price": 12.99
+            },
+            {
+                "category": "fiction",
+                "author": "Herman Melville",
+                "title": "Moby Dick",
+                "isbn": "0-553-21311-3",
+                "price": 8.99
+            },
+            {
+                "category": "fiction",
+                "author": "J. R. R. Tolkien",
+                "title": "The Lord of the Rings",
+                "isbn": "0-395-19395-8",
+                "price": 22.99
+            }
+        ],
+        "bicycle": {
+            "color": "red",
+            "price": 19.95
+        }
+    },
+    "expensive": 10
+}]]></payload>
+          </payload-provider>
+        </input-message-provider>
+        <assertions>
+          <assert-payload-equals>
+            <payload><![CDATA[{"color":"red","price":19.95}]]></payload>
+          </assert-payload-equals>
+        </assertions>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON Path Workflow</workflow>
+            <service>json-path-service</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <test>
+      <unique-id>JSON XML</unique-id>
+      <test-case>
+        <unique-id>JSON to XML Test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="empty-metadata-provider"/>
+          <payload-provider class="inline-payload-provider">
+            <payload><![CDATA[{
+    "store": {
+        "book": [
+            {
+                "category": "reference",
+                "author": "Nigel Rees",
+                "title": "Sayings of the Century",
+                "price": 8.95
+            },
+            {
+                "category": "fiction",
+                "author": "Evelyn Waugh",
+                "title": "Sword of Honour",
+                "price": 12.99
+            },
+            {
+                "category": "fiction",
+                "author": "Herman Melville",
+                "title": "Moby Dick",
+                "isbn": "0-553-21311-3",
+                "price": 8.99
+            },
+            {
+                "category": "fiction",
+                "author": "J. R. R. Tolkien",
+                "title": "The Lord of the Rings",
+                "isbn": "0-395-19395-8",
+                "price": 22.99
+            }
+        ],
+        "bicycle": {
+            "color": "red",
+            "price": 19.95
+        }
+    },
+    "expensive": 10
+}]]></payload>
+          </payload-provider>
+        </input-message-provider>
+        <assertions>
+          <assert-payload-equals>
+            <payload><![CDATA[<json><store><bicycle><color>red</color><price>19.95</price></bicycle><book><author>Nigel Rees</author><price>8.95</price><category>reference</category><title>Sayings of the Century</title></book><book><author>Evelyn Waugh</author><price>12.99</price><category>fiction</category><title>Sword of Honour</title></book><book><author>Herman Melville</author><price>8.99</price><isbn>0-553-21311-3</isbn><category>fiction</category><title>Moby Dick</title></book><book><author>J. R. R. Tolkien</author><price>22.99</price><isbn>0-395-19395-8</isbn><category>fiction</category><title>The Lord of the Rings</title></book></store><expensive>10</expensive></json>]]></payload>
+          </assert-payload-equals>
+        </assertions>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON XML Workflow</workflow>
+            <service>JSON to XML</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <test>
+      <unique-id>XML JSON</unique-id>
+      <test-case>
+        <unique-id>XML to JSON Test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="empty-metadata-provider"/>
+          <payload-provider class="inline-payload-provider">
+            <payload><![CDATA[<json><store><bicycle><color>red</color><price>19.95</price></bicycle><book><author>Nigel Rees</author><price>8.95</price><category>reference</category><title>Sayings of the Century</title></book><book><author>Evelyn Waugh</author><price>12.99</price><category>fiction</category><title>Sword of Honour</title></book><book><author>Herman Melville</author><price>8.99</price><isbn>0-553-21311-3</isbn><category>fiction</category><title>Moby Dick</title></book><book><author>J. R. R. Tolkien</author><price>22.99</price><isbn>0-395-19395-8</isbn><category>fiction</category><title>The Lord of the Rings</title></book></store><expensive>10</expensive></json>]]></payload>
+          </payload-provider>
+        </input-message-provider>
+        <assertions>
+          <assert-payload-equals>
+            <payload><![CDATA[{"store":{"bicycle":{"color":"red","price":19.95},"book":[{"author":"Nigel Rees","price":8.95,"category":"reference","title":"Sayings of the Century"},{"author":"Evelyn Waugh","price":12.99,"category":"fiction","title":"Sword of Honour"},{"author":"Herman Melville","price":8.99,"isbn":"0-553-21311-3","category":"fiction","title":"Moby Dick"},{"author":"J. R. R. Tolkien","price":22.99,"isbn":"0-395-19395-8","category":"fiction","title":"The Lord of the Rings"}]},"expensive":10}]]></payload>
+          </assert-payload-equals>
+        </assertions>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON XML Workflow</workflow>
+            <service>XML to JSON</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <test>
+      <unique-id>JSON Transform</unique-id>
+      <test-case>
+        <unique-id>JSON Transform Test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="empty-metadata-provider"/>
+          <payload-provider class="inline-payload-provider">
+            <payload><![CDATA[{ "rating": { "primary": { "values": 3 }, "quality": { "values": 3 } } }]]></payload>
+          </payload-provider>
+        </input-message-provider>
+        <assertions>
+          <assert-payload-equals>
+            <payload><![CDATA[{"Rating":3,"SecondaryRatings":{"quality":{"Id":"quality","Value":3,"Range":5}},"Range":5}]]></payload>
+          </assert-payload-equals>
+        </assertions>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON Transform Workflow</workflow>
+            <service>JSON Transform</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <test>
+      <unique-id>JSON to Metadata</unique-id>
+      <test-case>
+        <unique-id>JSON to Metadata Test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="empty-metadata-provider"/>
+          <payload-provider class="inline-payload-provider">
+            <payload><![CDATA[ {
+  "name":"John",
+  "age":30,
+  "cars": [
+    { "name":"Ford", "models":[ "Fiesta", "Focus", "Mustang" ] },
+    { "name":"BMW", "models":[ "320", "X3", "X5" ] },
+    { "name":"Fiat", "models":[ "500", "Panda" ] }
+  ]
+ }]]></payload>
+          </payload-provider>
+        </input-message-provider>
+        <assertions>
+          <assert-metadata-equals>
+            <metadata>
+              <key-value-pair>
+                <key>name</key>
+                <value>John</value>
+              </key-value-pair>
+              <key-value-pair>
+                <key>age</key>
+                <value>30</value>
+              </key-value-pair>
+              <key-value-pair>
+                <key>cars</key>
+                <value>[{&quot;name&quot;:&quot;Ford&quot;,&quot;models&quot;:[&quot;Fiesta&quot;,&quot;Focus&quot;,&quot;Mustang&quot;]},{&quot;name&quot;:&quot;BMW&quot;,&quot;models&quot;:[&quot;320&quot;,&quot;X3&quot;,&quot;X5&quot;]},{&quot;name&quot;:&quot;Fiat&quot;,&quot;models&quot;:[&quot;500&quot;,&quot;Panda&quot;]}]</value>
+              </key-value-pair>
+            </metadata>
+          </assert-metadata-equals>
+        </assertions>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON Metadata Workflow</workflow>
+            <service>JSON to Metadata</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <test>
+      <unique-id>Metadata to JSON</unique-id>
+      <test-case>
+        <unique-id>Metadata to JSON Test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="inline-metadata-provider">
+            <metadata>
+              <key-value-pair>
+                <key>cars</key>
+                <value>[{&quot;name&quot;:&quot;Ford&quot;,&quot;models&quot;:[&quot;Fiesta&quot;,&quot;Focus&quot;,&quot;Mustang&quot;]},{&quot;name&quot;:&quot;BMW&quot;,&quot;models&quot;:[&quot;320&quot;,&quot;X3&quot;,&quot;X5&quot;]},{&quot;name&quot;:&quot;Fiat&quot;,&quot;models&quot;:[&quot;500&quot;,&quot;Panda&quot;]}]</value>
+              </key-value-pair>
+              <key-value-pair>
+                <key>name</key>
+                <value>John</value>
+              </key-value-pair>
+              <key-value-pair>
+                <key>age</key>
+                <value>30</value>
+              </key-value-pair>
+            </metadata>
+          </metadata-provider>
+          <payload-provider class="empty-payload-provider"/>
+        </input-message-provider>
+        <assertions>
+          <assert-payload-equals>
+            <payload><![CDATA[{"cars":"[{\"name\":\"Ford\",\"models\":[\"Fiesta\",\"Focus\",\"Mustang\"]},{\"name\":\"BMW\",\"models\":[\"320\",\"X3\",\"X5\"]},{\"name\":\"Fiat\",\"models\":[\"500\",\"Panda\"]}]","name":"John","age":"30"}]]></payload>
+          </assert-payload-equals>
+        </assertions>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON Metadata Workflow</workflow>
+            <service>Metadata to JSON</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test>
+    <!--test>
+      <unique-id>Streaming JSON XML Tranform</unique-id>
+      <test-case>
+        <unique-id>Streaming JSON XML Tranform Test</unique-id>
+        <input-message-provider>
+          <metadata-provider class="empty-metadata-provider"/>
+          <payload-provider class="file-payload-provider">
+            <file>/home/ashley/src/work/json-testing/stream-test.json</file>
+          </payload-provider>
+        </input-message-provider>
+        <assertions/>
+      </test-case>
+      <service-to-test>
+        <source class="file-source">
+          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
+        </source>
+        <preprocessors>
+          <service-unique-id-preprocessor>
+            <channel>JSON Test Channel</channel>
+            <workflow>JSON Streaming Workflow</workflow>
+            <service>Streaming JSON XML Tranform</service>
+          </service-unique-id-preprocessor>
+        </preprocessors>
+      </service-to-test>
+    </test-->
+  </test-list>
+</service-test>
