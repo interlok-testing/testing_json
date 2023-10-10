@@ -64,7 +64,6 @@
           <producer class="null-message-producer">
             <unique-id>null-producer-1</unique-id>
           </producer>
-          <produce-exception-handler class="null-produce-exception-handler"/>
           <unique-id>JSON Web Token Workflow</unique-id>
           <message-metrics-interceptor>
             <unique-id>JSON Web Token Workflow-MessageMetrics</unique-id>
@@ -94,7 +93,6 @@
           <producer class="null-message-producer">
             <unique-id>null-producer-2</unique-id>
           </producer>
-          <produce-exception-handler class="null-produce-exception-handler"/>
           <unique-id>JQ Transform Workflow</unique-id>
           <message-metrics-interceptor>
             <unique-id>JQ Transform Workflow-MessageMetrics</unique-id>
@@ -130,7 +128,6 @@
           <producer class="null-message-producer">
             <unique-id>null-producer-3</unique-id>
           </producer>
-          <produce-exception-handler class="null-produce-exception-handler"/>
           <unique-id>JSON Path Workflow</unique-id>
           <message-metrics-interceptor>
             <unique-id>JSON Path Workflow-MessageMetrics</unique-id>
@@ -170,7 +167,6 @@
           <producer class="null-message-producer">
             <unique-id>null-producer-4</unique-id>
           </producer>
-          <produce-exception-handler class="null-produce-exception-handler"/>
           <unique-id>JSON XML Workflow</unique-id>
           <message-metrics-interceptor>
             <unique-id>JSON XML Workflow-MessageMetrics</unique-id>
@@ -205,7 +201,6 @@
           <producer class="null-message-producer">
             <unique-id>eager-hugle</unique-id>
           </producer>
-          <produce-exception-handler class="null-produce-exception-handler"/>
           <unique-id>JSON Transform Workflow</unique-id>
           <message-metrics-interceptor>
             <unique-id>JSON Transform Workflow-MessageMetrics</unique-id>
@@ -237,7 +232,6 @@
           <producer class="null-message-producer">
             <unique-id>loving-babbage</unique-id>
           </producer>
-          <produce-exception-handler class="null-produce-exception-handler"/>
           <unique-id>JSON Metadata Workflow</unique-id>
           <message-metrics-interceptor>
             <unique-id>JSON Metadata Workflow-MessageMetrics</unique-id>
@@ -268,7 +262,6 @@
           <producer class="null-message-producer">
             <unique-id>zen-franklin</unique-id>
           </producer>
-          <produce-exception-handler class="null-produce-exception-handler"/>
           <unique-id>JSON Streaming Workflow</unique-id>
           <message-metrics-interceptor>
             <unique-id>JSON Streaming Workflow-MessageMetrics</unique-id>
