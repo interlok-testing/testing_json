@@ -33,3 +33,8 @@ Tests the JSON transform service, which allows JSON -> JSON
 transformations to be made. The service takes source JSON content and
 applies the transform definition, the result of which will be more JSON
 content.
+
+### Getting started
+
+* `./gradlew clean build`
+* `(cd ./build/distribution && java -jar lib/interlok-boot.jar)`
