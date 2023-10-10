@@ -1,6 +1,14 @@
 <service-test>
   <unique-id>eager-hamilton</unique-id>
-  <test-client class="local-jmx-test-client"/>
+ <test-client class="embedded-jmx-test-client">
+    <shared-components>
+      <connections/>
+      <services/>
+    </shared-components>
+    <shared-components-provider>
+      <services/>
+    </shared-components-provider>
+  </test-client>
   <helpers/>
   <test-list>
     <unique-id>JSON Test Channel</unique-id>
@@ -67,7 +75,7 @@
           </payload-provider>
         </input-message-provider>
         <assertions>
-          <assert-payload-equals>
+          <assert-json-payload-equals>
             <payload><![CDATA[{
   "firstName" : "John",
   "lastName" : "Smith",
@@ -89,7 +97,7 @@
   } ],
   "spouse" : null
 }]]></payload>
-          </assert-payload-equals>
+          </assert-json-payload-equals>
         </assertions>
       </test-case>
       <service-to-test>
