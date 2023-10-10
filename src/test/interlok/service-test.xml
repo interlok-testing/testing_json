@@ -385,30 +385,5 @@
         </preprocessors>
       </service-to-test>
     </test>
-    <!--test>
-      <unique-id>Streaming JSON XML Tranform</unique-id>
-      <test-case>
-        <unique-id>Streaming JSON XML Tranform Test</unique-id>
-        <input-message-provider>
-          <metadata-provider class="empty-metadata-provider"/>
-          <payload-provider class="file-payload-provider">
-            <file>/home/ashley/src/work/json-testing/stream-test.json</file>
-          </payload-provider>
-        </input-message-provider>
-        <assertions/>
-      </test-case>
-      <service-to-test>
-        <source class="file-source">
-          <file>file:///${service.tester.working.directory}/src/main/interlok/config/adapter.xml</file>
-        </source>
-        <preprocessors>
-          <service-unique-id-preprocessor>
-            <channel>JSON Test Channel</channel>
-            <workflow>JSON Streaming Workflow</workflow>
-            <service>Streaming JSON XML Tranform</service>
-          </service-unique-id-preprocessor>
-        </preprocessors>
-      </service-to-test>
-    </test-->
   </test-list>
 </service-test>

@@ -33,12 +33,3 @@ Tests the JSON transform service, which allows JSON -> JSON
 transformations to be made. The service takes source JSON content and
 applies the transform definition, the result of which will be more JSON
 content.
-
-## json-streaming
-
-To test the JSON streaming components it is necessary to have a workflow
-with a consumer, as the service tester has problems with such large
-files. There for the streaming workflow has a file system consumer,
-which polls the directory *in*. There is a particularly large JSON file,
-*stream-test.json*, which the streaming transformation service will turn
-into XML.
