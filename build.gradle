@@ -18,17 +18,17 @@ allprojects {
 
 
 dependencies {
-  interlokRuntime  group: "com.adaptris", name: "interlok-json", version: interlokVersion, changing: true
-  interlokRuntime  group: "com.adaptris", name: "interlok-jq", version: interlokVersion, changing: true
-  interlokRuntime  group: "com.adaptris", name: "interlok-json-streaming", version: interlokVersion, changing: true
-  interlokRuntime  group: "com.adaptris", name: "interlok-json-web-token", version: interlokVersion, changing: true
-  interlokRuntime ("com.adaptris:interlok-service-tester:$interlokVersion") { changing=true }
+  interlokRuntime ("com.adaptris:interlok-json:$interlokVersion") { changing=true }
+  interlokRuntime ("com.adaptris:interlok-jq:$interlokVersion") { changing=true }
+  interlokRuntime ("com.adaptris:interlok-json-streaming:$interlokVersion") { changing=true }
+  interlokRuntime ("com.adaptris:interlok-json-web-token:$interlokVersion") { changing=true }
 
   interlokJavadocs group: "com.adaptris", name: "interlok-json", version: interlokVersion, changing: true, classifier: "javadoc", transitive: false
   interlokJavadocs group: "com.adaptris", name: "interlok-jq", version: interlokVersion, changing: true, classifier: "javadoc", transitive: false
   interlokJavadocs group: "com.adaptris", name: "interlok-json-streaming", version: interlokVersion, changing: true, classifier: "javadoc", transitive: false
   interlokJavadocs group: "com.adaptris", name: "interlok-json-web-token", version: interlokVersion, changing: true, classifier: "javadoc", transitive: false
   interlokJavadocs group: "com.adaptris", name: "interlok-service-tester", version: "$interlokVersion", classifier: "javadoc", changing: true, transitive: false
+  interlokJavadocs group: "com.adaptris", name: "interlok-service-tester-json", version: "$interlokVersion", classifier: "javadoc", changing: true, transitive: false
   
   interlokTestRuntime ("com.adaptris:interlok-service-tester:$interlokVersion") { changing=true }
   interlokTestRuntime ("com.adaptris:interlok-service-tester-json:$interlokVersion") { changing=true }
