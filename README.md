@@ -1,5 +1,8 @@
 # JSON Testing
 
+[![license](https://img.shields.io/github/license/interlok-testing/testing_json.svg)](https://github.com/interlok-testing/testing_json/blob/develop/LICENSE)
+[![Actions Status](https://github.com/interlok-testing/testing_json/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/interlok-testing/testing_json/actions/workflows/gradle-build.yml)
+
 This project tests various interlok-json related components and
 features.
 
