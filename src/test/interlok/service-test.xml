@@ -39,7 +39,7 @@
         </input-message-provider>
         <assertions>
           <assert-payload-equals>
-            <payload><![CDATA[{"sub":"Subject","aud":"Audience","nbf":1609372800,"iss":"Issuer","exp":4133894400,"iat":1616507237,"jti":"6a0b5a54-3c6f-41ef-b554-7a9af4d03a2d"}]]></payload>
+            <payload><![CDATA[{"sub":"Subject","aud":["Audience"],"nbf":1609372800,"iss":"Issuer","exp":4133894400,"iat":1616507237,"jti":"6a0b5a54-3c6f-41ef-b554-7a9af4d03a2d"}]]></payload>
           </assert-payload-equals>
           <assert-metadata-equals>
             <metadata>
