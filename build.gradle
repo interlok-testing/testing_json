@@ -6,7 +6,6 @@ plugins {
 ext {
   testingCommonGradle = "https://raw.githubusercontent.com/interlok-testing/testing_common/refs/heads/master/common.gradle?timestamp=${new Date().getTime()}"
 //  testingCommonGradle = "../testing_common/common.gradle"
-  interlokTestingVersion = "0.1"
   includeWar='true'
 }
 
@@ -27,9 +26,7 @@ dependencies {
   interlokJavadocs group: "com.adaptris", name: "interlok-jq", version: interlokVersion, changing: true, classifier: "javadoc", transitive: false
   interlokJavadocs group: "com.adaptris", name: "interlok-json-streaming", version: interlokVersion, changing: true, classifier: "javadoc", transitive: false
   interlokJavadocs group: "com.adaptris", name: "interlok-json-web-token", version: interlokVersion, changing: true, classifier: "javadoc", transitive: false
-  interlokJavadocs group: "com.adaptris", name: "interlok-service-tester", version: "$interlokVersion", classifier: "javadoc", changing: true, transitive: false
-  interlokJavadocs group: "com.adaptris", name: "interlok-service-tester-json", version: "$interlokVersion", classifier: "javadoc", changing: true, transitive: false
+  interlokJavadocs group: "com.adaptris", name: "interlok-service-tester-json", version: "$interlokServiceTesterVersion", classifier: "javadoc", changing: true, transitive: false
   
-  interlokTestRuntime ("com.adaptris:interlok-service-tester:$interlokVersion") { changing=true }
-  interlokTestRuntime ("com.adaptris:interlok-service-tester-json:$interlokVersion") { changing=true }
+  interlokTestRuntime ("com.adaptris:interlok-service-tester-json:$interlokServiceTesterVersion") { changing=true }
 }
